@@ -26,8 +26,8 @@ define( function( require ) {
     this.yNext = new Array( NSEGS );
     this.dotPerCm = 80;
 
-    this.modeProperty = new Property( 'manual' ); // 'manual', 'oscillate', 'pulse'
-    this.typeEndProperty = new Property( 'fixedEnd' ); // 'fixedEnd', 'looseEnd', 'noEnd'
+    this.modeProperty = new Property( 'oscillate' ); // 'manual', 'oscillate', 'pulse'
+    this.typeEndProperty = new Property( 'looseEnd' ); // 'fixedEnd', 'looseEnd', 'noEnd'
     this.speedProperty = new Property( 1 ); // 1, 0.25
     this.rulersProperty = new Property( false ); // visible rulers
     this.timerProperty = new Property( false );  // visible timer

@@ -62,9 +62,12 @@ define( function( require ) {
 
     model.typeEndProperty.link( function updateVisible( value ) {
       clamp.setVisible( value === 'fixedEnd' );
-      ring_back.setVisible( value === 'looseEnd' );
+      /*ring_back.setVisible( value === 'looseEnd' );
       post.setVisible( value === 'looseEnd' );
-      ring_front.setVisible( value === 'looseEnd' );
+      ring_front.setVisible( value === 'looseEnd' );*/
+      ring_back.setVisible( false );
+      post.setVisible( false );
+      ring_front.setVisible( false );
       windowNode.setVisible( value === 'noEnd' );
 
       if ( value === 'fixedEnd' ) {
