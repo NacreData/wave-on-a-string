@@ -27,13 +27,13 @@ define( function( require ) {
     this.dotPerCm = 1.2;
 
     this.modeProperty = new Property( 'oscillate' ); // 'manual', 'oscillate', 'pulse'
-    this.typeEndProperty = new Property( 'looseEnd' ); // 'fixedEnd', 'looseEnd', 'noEnd'
+    this.typeEndProperty = new Property( 'noEnd' ); // 'fixedEnd', 'looseEnd', 'noEnd'
     this.speedProperty = new Property( 1 ); // 1, 0.25
     this.rulersProperty = new Property( true ); // visible rulers
     this.timerProperty = new Property( true );  // visible timer
     this.referenceLineProperty = new Property( true ); // visible referenceLine
     this.tensionProperty = new Property( 2 ); // tension 0..2
-    this.dampingProperty = new Property( 20 ); // dumping 0..100
+    this.dampingProperty = new Property( 0 ); // dumping 0..100
     this.frequencyProperty = new Property( 50 ); // frequency 0.00 .. 3.00
     this.pulseWidthProperty = new Property( 0.5 ); // pulse width 0.00 .. 1.00
     this.amplitudeProperty = new Property( 20 ); // amplitude 0.0 .. 1.5

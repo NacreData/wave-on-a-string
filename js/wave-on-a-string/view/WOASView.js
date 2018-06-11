@@ -252,7 +252,7 @@ define( function( require ) {
     var endNode = new EndNode( model, this.frameEmitter, { x: Constants.endTheStringNode, y: Constants.yTheStringNode } );
     endNode.windowNode.x += Constants.endTheStringNode;
     endNode.windowNode.y += Constants.yTheStringNode;
-    this.addChild( endNode.windowNode );
+    // this.addChild( endNode.windowNode );
     this.addChild( new ReferenceLine( model ) );
     this.addChild( endNode );
     this.addChild( new TheStringNode( model, this.frameEmitter, {
@@ -265,16 +265,16 @@ define( function( require ) {
       y: Constants.yTheStringNode,
       range: Constants.yWrenchRange
     } ) );
-    this.addChild( windowImage = new Node( {
+    windowImage = new Node( {
       children: [ new Image( windowEdgeImage, {
         left: Constants.windowXOffset - 4 + Constants.windowShift,
         centerY: 0,
         scale: Constants.windowScale
       } ) ], x: Constants.endTheStringNode, y: Constants.yTheStringNode
-    } ) );
+    } );
 
     model.typeEndProperty.link( function updateVisible( value ) {
-      windowImage.setVisible( value === 'noEnd' );
+      windowImage.setVisible( false );
     } );
   }
 
