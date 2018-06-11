@@ -85,13 +85,13 @@ define( function( require ) {
     Constants.boundedDragHandler( rulerV, model.rulerLocVProperty, 30 );
     Constants.boundedDragHandler( rulerH, model.rulerLocHProperty, 30 );
 
-    /*this.addChild( typeRadio = new RadioGroup( {
+    typeRadio = new RadioGroup( {
       radio: [  'oscillate' ],
       text: [  oscillateString ],
       property: model.modeProperty,
       x: 5,
       y: 5
-    } ) );*/
+    } );
     
     this.addChild( new RestartButton( model, { x: 5 + 10, y: 5 } ) );
 
