@@ -111,7 +111,7 @@ define( function( require ) {
     } ) );*/
 
     var amplitudeSlider = new Slider( {
-      type: 'simple',
+      type: 'button',
       buttonStep: 1,
       title: amplitudeString,
       property: model.amplitudeProperty,
@@ -123,7 +123,7 @@ define( function( require ) {
     amplitudeSlider.right = typeRadio.right + 50;
 
     var frequencySlider = new Slider( {
-      type: 'simple',
+      type: 'button',
       buttonStep: 1,
       title: frequencyString,
       property: model.frequencyProperty,
