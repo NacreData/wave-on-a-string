@@ -41,9 +41,9 @@ define( function( require ) {
     maxWidthBottomControlPanel: 1000,
     tensionRange: new RangeWithValue( 0, 2 ),
     dampingRange: new RangeWithValue( 0, 100 ),
-    frequencyRange: new RangeWithValue( 0, 3 ),
+    frequencyRange: new RangeWithValue( 0, 100 ),
     pulseWidthRange: new RangeWithValue( 0.2, 1 ),
-    amplitudeRange: new RangeWithValue( 0, 1.25 ),
+    amplitudeRange: new RangeWithValue( 0, 100 ),
 
     postGradient: new LinearGradient( -5, 0, 5, 0 )
       .addColorStop( 0, '#666' )

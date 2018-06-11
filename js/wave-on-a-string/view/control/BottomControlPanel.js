@@ -29,6 +29,7 @@ define( function( require ) {
   var patternValueUnitCmString = require( 'string!WAVE_ON_A_STRING/patternValueUnitCm' );
   var patternValueUnitHzString = require( 'string!WAVE_ON_A_STRING/patternValueUnitHz' );
   var patternValueUnitPercentageString = require( 'string!WAVE_ON_A_STRING/patternValueUnitPercentage' );
+  var patternValueUnitNoneString = require( 'string!WAVE_ON_A_STRING/patternValueUnitNone' );
   var patternValueUnitSString = require( 'string!WAVE_ON_A_STRING/patternValueUnitS' );
   var pulseWidthString = require( 'string!WAVE_ON_A_STRING/pulseWidth' );
   var referenceLineString = require( 'string!WAVE_ON_A_STRING/referenceLine' );
@@ -122,11 +123,11 @@ define( function( require ) {
 
     var amplitudeSlider = new Slider( {
       type: 'button',
-      buttonStep: 0.01,
+      buttonStep: 1,
       title: amplitudeString,
       property: model.amplitudeProperty,
-      patternValueUnit: patternValueUnitCmString,
-      roundingDigits: 2,
+      patternValueUnit: patternValueUnitNoneString,
+      roundingDigits: 0,
       range: Constants.amplitudeRange
     } );
 
@@ -134,7 +135,7 @@ define( function( require ) {
 
 
     var oscillatePanel = new Panel( new Node( {
-      children: [ amplitudeSlider, frequencySlider, dampingSlider, tensionSlider, separator, checkboxGroup ]
+      children: [ dampingSlider, tensionSlider, separator, checkboxGroup ]
     } ), {
       fill: '#D9FCC5', xMargin: 15, yMargin: 5
     } );
@@ -148,7 +149,7 @@ define( function( require ) {
     this.addChild( manualPanel );
 
     var pulsePanel = new Panel( new Node( {
-      children: [ amplitudeSlider, pulseWidthSlider, dampingSlider, tensionSlider, separator, checkboxGroup ]
+      children: [dampingSlider, tensionSlider, separator, checkboxGroup ]
     } ), {
       fill: '#D9FCC5', xMargin: 15, yMargin: 5
     } );
