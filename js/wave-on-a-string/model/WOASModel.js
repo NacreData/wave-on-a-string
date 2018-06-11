@@ -24,19 +24,19 @@ define( function( require ) {
     this.yNow = new Array( NSEGS );
     this.yLast = new Array( NSEGS );
     this.yNext = new Array( NSEGS );
-    this.dotPerCm = 80;
+    this.dotPerCm = 1.2;
 
     this.modeProperty = new Property( 'oscillate' ); // 'manual', 'oscillate', 'pulse'
     this.typeEndProperty = new Property( 'looseEnd' ); // 'fixedEnd', 'looseEnd', 'noEnd'
     this.speedProperty = new Property( 1 ); // 1, 0.25
-    this.rulersProperty = new Property( false ); // visible rulers
-    this.timerProperty = new Property( false );  // visible timer
-    this.referenceLineProperty = new Property( false ); // visible referenceLine
+    this.rulersProperty = new Property( true ); // visible rulers
+    this.timerProperty = new Property( true );  // visible timer
+    this.referenceLineProperty = new Property( true ); // visible referenceLine
     this.tensionProperty = new Property( 2 ); // tension 0..2
     this.dampingProperty = new Property( 20 ); // dumping 0..100
-    this.frequencyProperty = new Property( 1.50 ); // frequency 0.00 .. 3.00
+    this.frequencyProperty = new Property( 50 ); // frequency 0.00 .. 3.00
     this.pulseWidthProperty = new Property( 0.5 ); // pulse width 0.00 .. 1.00
-    this.amplitudeProperty = new Property( 0.75 ); // amplitude 0.0 .. 1.5
+    this.amplitudeProperty = new Property( 20 ); // amplitude 0.0 .. 1.5
     this.playProperty = new Property( true ); // play/pause state
     this.lastDtProperty = new Property( 0.03 );
     this.timeProperty = new Property( 0 ); // base time
@@ -124,6 +124,9 @@ define( function( require ) {
 
       this.yNext[ 0 ] = this.yNow[ 0 ];
       switch( this.typeEndProperty.get() ) {
+        case 'fixedEnd':
+          this.yNow[ this.nSegs - 1 ] = 0;
+          break;
         case'looseEnd':
           this.yNow[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 2 ];
           break;
@@ -131,7 +134,7 @@ define( function( require ) {
           this.yNow[ this.nSegs - 1 ] = this.yLast[ this.nSegs - 2 ];
           break;
         default: //'fixedEnd'
-          this.yNow[ this.nSegs - 1 ] = 0;
+          this.yNow[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 2 ];
       }
 
       //main formula for calculating
@@ -160,18 +163,21 @@ define( function( require ) {
       this.yNext[ lastIndex ] = oldNext;
 
       switch( this.typeEndProperty.get() ) {
+        case 'fixedEnd':
+          this.yLast[ this.nSegs - 1 ] = 0;
+          this.yNow[ this.nSegs - 1 ] = 0;
+          break;
         case'looseEnd':
           this.yLast[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 1 ];
           this.yNow[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 2 ];
           break;
         case'noEnd':
           this.yLast[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 1 ];
-          this.yNow[ this.nSegs - 1 ] = this.yLast[ this.nSegs - 2 ]; // from a comment in the old model code?
-          // from the Flash model: this.yNow[this.nSegs - 1] = this.yNow[this.nSegs - 1];//this.yLast[this.nSegs - 2];
+          this.yNow[ this.nSegs - 1 ] = this.yLast[ this.nSegs - 2 ]; // from a comment in the old model code?          
           break;
         default: //'fixedEnd'
-          this.yLast[ this.nSegs - 1 ] = 0;
-          this.yNow[ this.nSegs - 1 ] = 0;
+          this.yLast[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 1 ];
+          this.yNow[ this.nSegs - 1 ] = this.yNow[ this.nSegs - 2 ];
       }
     },
     manualStep: function( dt ) {
@@ -196,7 +202,7 @@ define( function( require ) {
 
         if ( this.modeProperty.get() === 'oscillate' ) {
           this.angleProperty.set( this.angleProperty.get() +
-                                  Math.PI * 2 * this.frequencyProperty.get() * fixDt * this.speedProperty.get() );
+                                  Math.PI * 2 * this.frequencyProperty.get() * (1 / 1666) * this.speedProperty.get() );
           this.angleProperty.set( this.angleProperty.get() % ( Math.PI * 2 ) );
           this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.get() * this.dotPerCm * Math.sin( -this.angleProperty.get() );
         }

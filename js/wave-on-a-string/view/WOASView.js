@@ -33,7 +33,9 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
   var waveOnAString = require( 'WAVE_ON_A_STRING/waveOnAString' );
-
+  var Slider = require( 'WAVE_ON_A_STRING/wave-on-a-string/view/control/slider/Slider' );
+  var Panel = require( 'SUN/Panel' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   // images
   var windowEdgeImage = require( 'image!WAVE_ON_A_STRING/window-front.png' );
 
@@ -47,6 +49,10 @@ define( function( require ) {
   var speedNormalString = require( 'string!WAVE_ON_A_STRING/speedNormal' );
   var speedSlowString = require( 'string!WAVE_ON_A_STRING/speedSlow' );
   var unitCmString = require( 'string!WAVE_ON_A_STRING/unitCm' );
+
+  var frequencyString = require( 'string!WAVE_ON_A_STRING/frequency' );
+  var amplitudeString = require( 'string!WAVE_ON_A_STRING/amplitude' );
+  var patternValueUnitNoneString = require( 'string!WAVE_ON_A_STRING/patternValueUnitNone' );
 
   function WOASView( model ) {
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
@@ -88,23 +94,60 @@ define( function( require ) {
     } ) );*/
     
     this.addChild( new RestartButton( model, { x: 5 + 10, y: 5 } ) );
-    
+
+
+//TEMP-s
     /*this.addChild( endTypeRadio = new RadioGroup( {
       radio: [  'looseEnd' ],
       text: [ looseEndString ],
       property: model.typeEndProperty,
       x: Constants.viewSize.width - 100,
       y: 5
-    } ) );*/
-    //endTypeRadio.right = Constants.viewSize.width - 5;
-    this.addChild( new RadioGroup( {
+    } ) );
+    endTypeRadio.right = Constants.viewSize.width - 5;
+    /*this.addChild( new RadioGroup( {
       radio: [ 0.25, 1 ],
       text: [ speedSlowString, speedNormalString ],
       property: model.speedProperty,
       omitPanel: true,
       right: centerControlX - 30,
       centerY: centerControlY
-    } ) );
+    } ) );*/
+
+    var amplitudeSlider = new Slider( {
+      type: 'button',
+      buttonStep: 1,
+      title: amplitudeString,
+      property: model.amplitudeProperty,
+      patternValueUnit: patternValueUnitNoneString,
+      roundingDigits: 0,
+      range: Constants.amplitudeRange,
+    } );
+
+    amplitudeSlider.right = typeRadio.right + 50;
+
+    var frequencySlider = new Slider( {
+      type: 'button',
+      buttonStep: 1,
+      title: frequencyString,
+      property: model.frequencyProperty,
+      patternValueUnit: patternValueUnitNoneString,
+      roundingDigits: 0,
+      range: Constants.frequencyRange,
+    } );
+
+    frequencySlider.right = typeRadio.right + 250;
+    
+    var sliderPanel = new Panel( new Node( {
+      children: [ amplitudeSlider, frequencySlider]
+    } ), {
+      fill: '#D9FCC5', xMargin: 15, yMargin: 5, x: typeRadio.right + 220, y: 5,
+    } );
+    sliderPanel.scale(0.6);
+    this.addChild( sliderPanel );
+
+
+
 
     var playPauseButtonOptions = {
       upFill: Constants.blueUpColor,
@@ -128,7 +171,7 @@ define( function( require ) {
     model.playProperty.lazyLink( function( isPlaying ) {
       playPauseButton.scale( isPlaying ? ( 1 / pauseSizeIncreaseFactor ) : pauseSizeIncreaseFactor );
     } );
-    this.addChild( new StepForwardButton( {
+    /*this.addChild( new StepForwardButton( {
       playingProperty: model.playProperty,
       listener: model.manualStep.bind( model ),
       x: centerControlX + 94,
@@ -141,7 +184,7 @@ define( function( require ) {
       downFill: Constants.blueDownColor,
       backgroundGradientColorStop0: Constants.buttonBorder0,
       backgroundGradientColorStop1: Constants.buttonBorder1
-    } ) );
+    } ) );*/
 
     var resetAllButton = new ResetAllButton( {
       listener: function() {
@@ -153,11 +196,11 @@ define( function( require ) {
     resetAllButton.scale( 0.924 );
     this.addChild( resetAllButton );
 
-    var bottomControlPanel = new BottomControlPanel( model );
+    /*var bottomControlPanel = new BottomControlPanel( model );
     this.addChild( bottomControlPanel );
 
     bottomControlPanel.right = resetAllButton.left - 10;
-    bottomControlPanel.bottom = resetAllButton.bottom;
+    bottomControlPanel.bottom = resetAllButton.bottom;*/
     /*---------------------------------------------------------------------------*
      * TimerNode
      *----------------------------------------------------------------------------*/

@@ -108,14 +108,14 @@ define( function( require ) {
           options.property.set( Math.max( Math.min( options.property.get() + value, options.range.max ), options.range.min ) );
         };
       };
-      buttonNode.addChild( plusButton = new ArrowButton( 'right', buttonPropertyUpdate( options.buttonStep ), {
+      /*buttonNode.addChild( plusButton = new ArrowButton( 'right', buttonPropertyUpdate( options.buttonStep ), {
         right: self.width,
         centerY: 15
       } ) );
       buttonNode.addChild( minusButton = new ArrowButton( 'left', buttonPropertyUpdate( -options.buttonStep ), {
         left: 0,
         centerY: 15
-      } ) );
+      } ) );*/
       buttonNode.addChild( new Rectangle( 0, 0, 90, 30, 5, 5, {
         fill: '#FFF',
         stroke: '#000',
@@ -142,8 +142,8 @@ define( function( require ) {
         }
         valueLabel.text = StringUtils.format( options.patternValueUnit, text );
         valueLabel.centerX = self.width / 2;
-        plusButton.enabled = ( value < options.range.max );
-        minusButton.enabled = ( value > options.range.min );
+        /*plusButton.enabled = ( value < options.range.max );
+        minusButton.enabled = ( value > options.range.min );*/
       }
     } );
   }

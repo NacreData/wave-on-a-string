@@ -62,6 +62,9 @@
   "unitCm": {
     "value": "cm"
   },
+  "patternValueUnitNone": {
+    "value": "{0}"
+  },
   "patternValueUnitHz": {
     "value": "{0} Hz"
   },
