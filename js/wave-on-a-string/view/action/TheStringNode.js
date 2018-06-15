@@ -51,7 +51,7 @@ define( function( require ) {
     } );
 
     for ( var i = 0; i < model.yDraw.length; i++ ) {
-      var bead = ( i % 10 === 0 ) ? limeNode : redNode;
+      var bead = ( i === 0 ) ? limeNode : redNode;
       theString.push( new Node( { x: i * options.radius * 2, children: [ bead ] } ) );
     }
     theString[ 0 ].scale( 1.2 );
