@@ -171,7 +171,7 @@ define( function( require ) {
     model.playProperty.lazyLink( function( isPlaying ) {
       playPauseButton.scale( isPlaying ? ( 1 / pauseSizeIncreaseFactor ) : pauseSizeIncreaseFactor );
     } );
-    /*this.addChild( new StepForwardButton( {
+    this.addChild( new StepForwardButton( {
       playingProperty: model.playProperty,
       listener: model.manualStep.bind( model ),
       x: centerControlX + 94,
@@ -184,7 +184,7 @@ define( function( require ) {
       downFill: Constants.blueDownColor,
       backgroundGradientColorStop0: Constants.buttonBorder0,
       backgroundGradientColorStop1: Constants.buttonBorder1
-    } ) );*/
+    } ) );
 
     var resetAllButton = new ResetAllButton( {
       listener: function() {
