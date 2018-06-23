@@ -202,7 +202,7 @@ define( function( require ) {
 
         if ( this.modeProperty.get() === 'oscillate' ) {
           this.angleProperty.set( this.angleProperty.get() +
-                                  Math.PI * 2 * this.frequencyProperty.get() * (1 / 1666) * this.speedProperty.get() );
+                                  Math.PI * 2 * this.frequencyProperty.get() * (1 / 600) * this.speedProperty.get() );
           this.angleProperty.set( this.angleProperty.get() % ( Math.PI * 2 ) );
           this.yDraw[ 0 ] = this.yNow[ 0 ] = this.amplitudeProperty.get() * this.dotPerCm * Math.sin( -this.angleProperty.get() );
         }
